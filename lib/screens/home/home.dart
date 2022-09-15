@@ -1,5 +1,6 @@
 import 'package:am_box/screens/box_display.dart';
 import 'package:am_box/screens/box_types.dart';
+import 'package:am_box/screens/components/custom_drawer.dart';
 import 'package:am_box/screens/home/box_category.dart';
 import 'package:am_box/screens/home/desc_categorie.dart';
 import 'package:am_box/utils/colors.dart';
@@ -32,7 +33,9 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: Colors.white,
       // drawerScrimColor: primaryColor,
-      drawer: Drawer(),
+      drawer: Drawer(
+        child: CustomDrawer(),
+      ),
       appBar: AppBar(
         actions: [
           Stack(
