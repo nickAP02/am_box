@@ -1,33 +1,30 @@
-import 'package:am_box/screens/auth/register.dart';
+import 'package:am_box/screens/auth/login.dart';
 import 'package:am_box/screens/home/home.dart';
 import 'package:am_box/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 
-class Login extends StatefulWidget {
-  const Login({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
-  State<Login> createState() => _LoginState();
+  State<Register> createState() => _RegisterState();
 }
 
-class _LoginState extends State<Login> {
+class _RegisterState extends State<Register> {
   final  _formKey = GlobalKey<FormState>();
   var phoneController = TextEditingController();
   var pwdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: primaryColor,
       appBar: AppBar(
         elevation:0,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 40),
-          child: const Text(
-            "CONNEXION",
-            style: TextStyle(
-              color: primaryColor
-            ),
+        title: const Text(
+          "CREATION DE COMPTE",
+          style: TextStyle(
+            color:primaryColor
           ),
         ),
         centerTitle: true,
@@ -42,7 +39,7 @@ class _LoginState extends State<Login> {
                 width: MediaQuery.of(context).size.width/1.45,
                 height: 500,
                 decoration: BoxDecoration(
-                  color: primaryColor,
+                  color: Colors.white,
                   borderRadius: BorderRadius.circular(35)
                 ),
                 child: Form(
@@ -57,19 +54,23 @@ class _LoginState extends State<Login> {
                               children: [
                                 Container(
                                   padding: EdgeInsets.only(bottom: 50),
-                                  margin: EdgeInsets.only(left:30,),
+                                  margin: EdgeInsets.only(right:10,),
                                   width:200,
                                   height: 50,
                                   decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: primaryColor
+                                    ),
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(35)
                                   ),
                                 ),
                                 Positioned(
-                                  right: 2,
+                                  left:0,
+                                  // right: 2,
                                   top: 2,
                                   child: Container(
-                                    margin: EdgeInsets.only(left:20,),
+                                    margin: EdgeInsets.only(right:20,),
                                     width:120,
                                     height: 46,
                                     decoration: BoxDecoration(
@@ -78,7 +79,7 @@ class _LoginState extends State<Login> {
                                     ),
                                     child: Center(
                                       child: Text(
-                                        "CONNEXION",
+                                        "INSCRIPTION",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -93,13 +94,85 @@ class _LoginState extends State<Login> {
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top:28.0,right: 15,left: 5,bottom: 30),
+                          padding: const EdgeInsets.only(top:5.0,right: 15,left: 5,bottom: 0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: primaryColor
+                              ),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(35)
+                              ),
+                            child: TextFormField(
+                              controller: pwdController,
+                              keyboardType: TextInputType.text,
+                              obscureText: false,
+                              decoration:const InputDecoration(
+                                contentPadding: EdgeInsets.only(right: 10),
+                                hintStyle: TextStyle(
+                                  color: primaryColor
+                                ),
+                                hintText: "Nom",
+                                icon: Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Icon(
+                                    Icons.person,
+                                    color: primaryColor,
+                                  ),
+                                ),
+                                border: InputBorder.none
+                              ),
+                              validator: (value){
+                                value = pwdController.text;
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top:5.0,right: 15,left: 5,bottom: 10),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: primaryColor
+                              ),
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(35)
+                              ),
+                            child: TextFormField(
+                              controller: pwdController,
+                              keyboardType: TextInputType.text,
+                              obscureText: false,
+                              decoration:const InputDecoration(
+                                contentPadding: EdgeInsets.only(right: 10),
+                                hintStyle: TextStyle(
+                                  color: primaryColor
+                                ),
+                                hintText: "Prenoms",
+                                icon: Padding(
+                                  padding: EdgeInsets.only(left: 20),
+                                  child: Icon(
+                                    Icons.person,
+                                    color: primaryColor,
+                                  ),
+                                ),
+                                border: InputBorder.none
+                              ),
+                              validator: (value){
+                                value = pwdController.text;
+                                return null;
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top:5.0,right: 15,left: 5,bottom: 10),
                           child: Container(
                              decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.white
+                                color: primaryColor
                               ),
-                                color: primaryColor,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(35)
                               ),
                             child: TextFormField(
@@ -109,14 +182,14 @@ class _LoginState extends State<Login> {
                               decoration:const InputDecoration(
                                 contentPadding: EdgeInsets.only(right: 10),
                                 hintStyle: TextStyle(
-                                  color: Colors.white
+                                  color: primaryColor
                                 ),
                                 hintText: "Tel",
                                 icon: Padding(
                                   padding: EdgeInsets.only(left: 20),
                                   child: Icon(
                                     Icons.phone,
-                                    color: Colors.white,
+                                    color: primaryColor,
                                   ),
                                 ),
                                 border: InputBorder.none
@@ -128,14 +201,15 @@ class _LoginState extends State<Login> {
                             ),
                           ),
                         ),
+                        
                         Padding(
-                          padding: const EdgeInsets.only(top:15.0,right: 15,left: 5,bottom: 30),
+                          padding: const EdgeInsets.only(top:5.0,right: 15,left: 5,bottom: 10),
                           child: Container(
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: Colors.white
+                                color: primaryColor
                               ),
-                                color: primaryColor,
+                                color: Colors.white,
                                 borderRadius: BorderRadius.circular(35)
                               ),
                             child: TextFormField(
@@ -145,14 +219,14 @@ class _LoginState extends State<Login> {
                               decoration:const InputDecoration(
                                 contentPadding: EdgeInsets.only(right: 10),
                                 hintStyle: TextStyle(
-                                  color: Colors.white
+                                  color: primaryColor
                                 ),
                                 hintText: "Mot de passe",
                                 icon: Padding(
                                   padding: EdgeInsets.only(left: 20),
                                   child: Icon(
                                     Icons.password,
-                                    color: Colors.white,
+                                    color: primaryColor,
                                   ),
                                 ),
                                 border: InputBorder.none
@@ -172,7 +246,7 @@ class _LoginState extends State<Login> {
                             overlayColor: MaterialStateProperty.all(primaryColor.withOpacity(0.25)),
                             shadowColor:  MaterialStateProperty.all(primaryColor.withOpacity(0.75)),
                             shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
-                            backgroundColor: MaterialStateProperty.all<Color>(Colors.white)
+                            backgroundColor: MaterialStateProperty.all<Color>(primaryColor)
                           ),
                           onPressed: (){
                             Navigator.of(context).push(
@@ -182,14 +256,14 @@ class _LoginState extends State<Login> {
                             );
                           },
                       child: Text(
-                            "VALIDER",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: primaryColor
-                            ),
-                          )
-                        ),
+                          "VALIDER",
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white
+                          ),
+                      )
+                      ),
                       ),
                       
                       ],
@@ -205,17 +279,17 @@ class _LoginState extends State<Login> {
               onPressed: (){
                 Navigator.of(context).push(
                       MaterialPageRoute(
-                          builder: (context)=>Register()
+                          builder: (context)=>Login()
                       )
                   );
               }, 
               child: Text(
-                "Pas encore de compte ? Inscrivez-vous",
-                style: TextStyle(
-                  color: primaryColor
-                ),
+                  "Vous avez déjà un compte ? Connectez-vous",
+                  style: TextStyle(
+                    color: Colors.white
+                  ),
                 )
-            ),
+              ),
           )
         ],
       ),

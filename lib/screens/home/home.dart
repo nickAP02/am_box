@@ -1,6 +1,7 @@
-import 'package:am_box/screens/box_display.dart';
-import 'package:am_box/screens/box_types.dart';
+import 'package:am_box/screens/box/box_display.dart';
+import 'package:am_box/screens/box/box_types.dart';
 import 'package:am_box/screens/components/custom_drawer.dart';
+import 'package:am_box/screens/components/notif.dart';
 import 'package:am_box/screens/home/box_category.dart';
 import 'package:am_box/screens/home/desc_categorie.dart';
 import 'package:am_box/utils/colors.dart';
@@ -51,7 +52,11 @@ class _HomeState extends State<Home> {
               IconButton(
             onPressed: 
             () {
-              debugPrint("salut toi");
+              Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context)=>Notif()
+                      )
+                  );
             },
             icon: Icon(Icons.notifications,color: primaryColor,)
             ),
@@ -62,7 +67,7 @@ class _HomeState extends State<Home> {
         title: Padding(
           padding: const EdgeInsets.only(left:0.0),
           child: Text(
-            "AMBOX",
+            "MIBOX",
             textAlign: TextAlign.left,
             style: TextStyle(
               color: primaryColor,
@@ -146,7 +151,7 @@ class _HomeState extends State<Home> {
                 Padding(
                   padding: const EdgeInsets.only(left:18.0,bottom: 18),
                   child: Text(
-                    "Les box",
+                    "Les box pour les utilisateurs",
                     style: TextStyle(
                       color: primaryColor,
                       fontSize: 16,
@@ -183,7 +188,46 @@ class _HomeState extends State<Home> {
             ],
           ),
           
+          // Padding(
+          //   padding: const EdgeInsets.only(bottom: 18,top: 20),
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //        Stack(
+          //          children:[
+          //           boxDisplay(
+          //           "Coffret feminin",
+          //           "parfum.jpg",
+          //           ),
+          //           BuyButton(),
+          //          ]
+          //        ),
+                
+          //       Stack(
+          //         children: [
+          //           boxDisplay(
+          //           "Coffret gourmand",
+          //           "vin.jpg",
+          //         ),
+          //          BuyButton()
+          //         ]
+          //       ),
+               
+          //   ],
+          //   ),
+          // ),
           Padding(
+            padding: const EdgeInsets.only(left:18.0,bottom: 18),
+            child: Text(
+              "Les box pour les entreprises",
+              style: TextStyle(
+                color: primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold
+              ),
+            ),
+          ),
+           Padding(
             padding: const EdgeInsets.only(bottom: 18,top: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,49 +235,26 @@ class _HomeState extends State<Home> {
                  Stack(
                    children:[
                     boxDisplay(
-                    "Coffret feminin",
+                    "Coffret feminin max",
                     "parfum.jpg",
                     ),
-                    BuyButton(),
+                    ContactButton(),
                    ]
                  ),
                 
                 Stack(
                   children: [
                     boxDisplay(
-                    "Coffret gourmand",
+                    "Coffret gourmand max",
                     "vin.jpg",
                   ),
-                   BuyButton()
+                   ContactButton()
                   ]
                 ),
                
             ],
             ),
           ),
-          // GridView.count(
-          //   shrinkWrap: true,
-          //   scrollDirection: Axis.vertical,
-          //   crossAxisCount: 2,
-          //   children: [
-          //     boxDisplay(
-          //       "Parfums",
-          //       "parfum.jpg",
-          //     ),
-          //     boxDisplay(
-          //       "Vins",
-          //       "vin.jpg",
-          //     ),
-          //     boxDisplay(
-          //       "Vins",
-          //       "vin.jpg",
-          //     ),
-          //      boxDisplay(
-          //       "Parfums",
-          //       "parfum.jpg",
-          //     ),
-          //   ],
-          // )
           ] 
         ),
       ),
@@ -265,6 +286,7 @@ class BuyButton extends StatelessWidget {
           builder: (context)=> BoxType(
           "Coffret gourmand",
           "Blabla",
+          "vin.jpg",
           22500,
           "3 mois"
           )
@@ -273,6 +295,48 @@ class BuyButton extends StatelessWidget {
         },           
         child: Text(
           "Acheter",
+          style: TextStyle(
+          fontSize: 10,
+          color: Colors.white
+          ),
+        )
+      ),
+    );
+  }
+}
+
+class ContactButton extends StatelessWidget {
+  const ContactButton({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 15,
+      right: 12,
+      child: ElevatedButton(
+        style: ButtonStyle(
+            overlayColor: MaterialStateProperty.all(primaryColor.withOpacity(0.25)),
+            shadowColor:  MaterialStateProperty.all(primaryColor.withOpacity(0.75)),
+            shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))),
+            backgroundColor: MaterialStateProperty.all<Color>(primaryColor)
+        ),
+        onPressed: (){
+        Navigator.of(context).push(
+          MaterialPageRoute(
+          builder: (context)=> BoxType(
+          "Coffret gourmand max",
+          "Blabla",
+          "vin.jpg",
+          22500,
+          "3 mois"
+          )
+          )
+          );
+        },           
+        child: Text(
+          "Contactez-nous",
           style: TextStyle(
           fontSize: 10,
           color: Colors.white

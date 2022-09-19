@@ -1,5 +1,4 @@
-import 'package:am_box/screens/auth/login.dart';
-import 'package:am_box/screens/home/home.dart';
+import 'package:am_box/screens/auth/register.dart';
 import 'package:am_box/utils/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +16,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: theme,
-      home:  Login(),
+      home:  const Register(),
     );
   }
 }

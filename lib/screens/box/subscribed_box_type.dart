@@ -1,8 +1,6 @@
 import 'package:am_box/utils/colors.dart';
 import 'package:am_box/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class BoxedType extends StatefulWidget {
   const BoxedType({Key? key}) : super(key: key);
@@ -74,16 +72,16 @@ class _BoxedTypeState extends State<BoxedType> {
               ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left:20,top:18.0),
-          child: Text(
-            "1 mois",
-            style: TextStyle(
-                color: primaryColor,
-                fontSize: 18
-              ),
-          ),
-        ),
+        // Padding(
+        //   padding: const EdgeInsets.only(left:20,top:18.0),
+        //   child: Text(
+        //     "1 mois",
+        //     style: TextStyle(
+        //         color: primaryColor,
+        //         fontSize: 18
+        //       ),
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(left:20,top:28.0),
           child: Text(
@@ -101,6 +99,10 @@ class _BoxedTypeState extends State<BoxedType> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
            Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color:primaryColor)
+            ),
             height: 60,
             width: MediaQuery.of(context).size.width/2,
             child: ElevatedButton(
@@ -135,7 +137,7 @@ class _BoxedTypeState extends State<BoxedType> {
               onPressed: (){
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Nouvel abonnement effectué",style: TextStyle(color: primaryColor),)));
               }, 
-              child: Text(
+              child: const Text(
                 "S'ABONNER",
                 style: TextStyle(
                   color: Colors.white,

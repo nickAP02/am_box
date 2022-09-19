@@ -1,33 +1,37 @@
-import 'package:am_box/screens/box_display.dart';
-import 'package:am_box/screens/subscribed_box_type.dart';
-import 'package:am_box/screens/unsubscribed_box_type.dart';
+import 'package:am_box/screens/box/subscribed_box_type.dart';
+import 'package:am_box/screens/box/unsubscribed_box_type.dart';
 import 'package:am_box/utils/colors.dart';
 import 'package:am_box/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class BoxType extends StatefulWidget {
-   const BoxType(
-    String label,
-    String desc,
-    double price,
-    String duration
+
+class EntrepriseBox extends StatefulWidget {
+    String label;
+    String desc;
+    String image;
+    double price;
+    String duration;
+    EntrepriseBox(
+      this.label,
+      this.desc,
+      this.image,
+      this.price,
+      this.duration
   );
 
   @override
-  State<BoxType> createState() => _BoxTypeState();
+  State<EntrepriseBox> createState() => _EntrepriseBoxState();
 }
 
-class _BoxTypeState extends State<BoxType> {
+class _EntrepriseBoxState extends State<EntrepriseBox> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation:0,
-        title: Text("Coffret gourmand"),
-        centerTitle: true,
+        title: Text(widget.label),
+        // centerTitle: true,
       ),
       
       body: SingleChildScrollView(
@@ -54,7 +58,7 @@ class _BoxTypeState extends State<BoxType> {
                   fit: BoxFit.cover,
                   scale: 1,
                   opacity: 1,
-                  image: AssetImage(assetUrl+"vin.jpg")
+                  image: AssetImage(assetUrl+widget.image)
                 ), 
               ),
             ),
@@ -66,8 +70,7 @@ class _BoxTypeState extends State<BoxType> {
                maxWidth: double.infinity
              ),
              child: Text(
-               "Le coffret gourmand est compose de 2  vins de grande marque et"+
-               "d'autres bullshit hyper couteux que vous nous ferez le plaisir d'acheter",
+               widget.desc,
                style: TextStyle(
                  color: primaryColor,
                  fontSize: 18
@@ -96,9 +99,9 @@ class _BoxTypeState extends State<BoxType> {
                     GestureDetector(
                       onTap: (){
                         Navigator.of(context).push(
-                    MaterialPageRoute(
-                            builder: (context)=>UnBoxedType()
-                    )
+                        MaterialPageRoute(
+                                builder: (context)=>UnBoxedType()
+                        )
                   );
                     },
                     child: Container(
@@ -120,7 +123,7 @@ class _BoxTypeState extends State<BoxType> {
                           fit: BoxFit.cover,
                           scale: 1,
                           opacity: 1,
-                          image: AssetImage(assetUrl+ "vin.jpg",)
+                          image: AssetImage(assetUrl+ widget.image,)
                         ), 
                       ),
                     ),
@@ -136,7 +139,7 @@ class _BoxTypeState extends State<BoxType> {
                 ),
               child:
               Text(
-                  "Coffret gourmand mini",
+                  widget.label,
                   style: TextStyle(
                     color: primaryColor,
                     fontSize: 12,
@@ -148,7 +151,7 @@ class _BoxTypeState extends State<BoxType> {
             Padding(
               padding: const EdgeInsets.only(left:15.0,top: 10),
               child: Text(
-                "13500 FCFA",
+                widget.price.toString(),
                 style: TextStyle(
                   color: primaryColor,
                   fontSize: 12,
@@ -192,7 +195,7 @@ class _BoxTypeState extends State<BoxType> {
                           fit: BoxFit.cover,
                           scale: 1,
                           opacity: 1,
-                          image: AssetImage(assetUrl+ "vin.jpg",)
+                          image: AssetImage(assetUrl+ widget.image,)
                         ), 
                       ),
                     ),
@@ -208,7 +211,7 @@ class _BoxTypeState extends State<BoxType> {
              ),
              child:
               Text(
-                  "Coffret gourmand",
+                  widget.label,
                   style: TextStyle(
                     color: primaryColor,
                     fontSize: 12,
@@ -220,7 +223,7 @@ class _BoxTypeState extends State<BoxType> {
             Padding(
               padding: const EdgeInsets.only(left:15.0,top: 10),
               child: Text(
-                "22500 FCFA",
+                widget.price.toString(),
                 style: TextStyle(
                   color: primaryColor,
                   fontSize: 12,
@@ -256,7 +259,7 @@ class _BoxTypeState extends State<BoxType> {
                         fit: BoxFit.cover,
                         scale: 1,
                         opacity: 1,
-                        image: AssetImage(assetUrl+ "vin.jpg",)
+                        image: AssetImage(assetUrl+ widget.image)
                       ), 
                     ),
                   ),
@@ -271,7 +274,7 @@ class _BoxTypeState extends State<BoxType> {
              ),
              child:
               Text(
-                  "Coffret gourmand ",
+                  widget.label,
                   style: TextStyle(
                     color: primaryColor,
                     fontSize: 12,
@@ -283,7 +286,7 @@ class _BoxTypeState extends State<BoxType> {
             Padding(
               padding: const EdgeInsets.only(left:15.0,top: 10),
               child: Text(
-                "30000 FCFA",
+                widget.price.toString(),
                 style: TextStyle(
                   color: primaryColor,
                   fontSize: 12,
@@ -295,116 +298,33 @@ class _BoxTypeState extends State<BoxType> {
           ),
           ]
         ),
-        Padding(
-          padding: const EdgeInsets.only(left:15.0,top: 10),
-          child: Text(
-            "Exemples de produits",
-            style: TextStyle(
-            color: primaryColor,
-            fontSize: 18,
-            // fontWeight: FontWeight.bold
-            ),
-          ),
-        ),
-        Row(
-          children: [
-          Container(
-            margin: EdgeInsets.only(left:10,right: 5,bottom: 80),
-            height: 120,
-            width: 120,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color:Colors.white.withOpacity(0.7),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3)
-                )
-              ],
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(25),
-              image:DecorationImage(
-                fit: BoxFit.cover,
-                scale: 1,
-                opacity: 1,
-                image: AssetImage(assetUrl+ "vin.jpg",)
-              ), 
-            ),
-                ),
-        Container(
-          margin: EdgeInsets.only(left:10,right: 5,bottom: 80),
-          height: 120,
-          width: 120,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color:Colors.white.withOpacity(0.7),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3)
-              )
-            ],
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(25),
-            image:DecorationImage(
-              fit: BoxFit.cover,
-              scale: 1,
-              opacity: 1,
-              image: AssetImage(assetUrl+ "vin.jpg",)
-            ), 
-          ),
-        ),
-            Container(
-              margin: EdgeInsets.only(left:10,right: 5,bottom: 80),
-              height: 120,
-              width: 120,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color:Colors.white.withOpacity(0.7),
-                    spreadRadius: 5,
-                    blurRadius: 7,
-                    offset: const Offset(0, 3)
-                  )
-                ],
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(25),
-                image:DecorationImage(
-                  fit: BoxFit.cover,
-                  scale: 1,
-                  opacity: 1,
-                  image: AssetImage(assetUrl+ "vin.jpg",)
-                ), 
-              ),
-            ),
-          ],
-        ),
-    
+        
         ]
         ),
       ),
-      bottomSheet: Container(
-        height: 60,
-        width: MediaQuery.of(context).size.width,
-        child: ElevatedButton(
-          style: ButtonStyle(
-              overlayColor: MaterialStateProperty.all(primaryColor.withOpacity(0.25)),
-              shadowColor:  MaterialStateProperty.all(primaryColor.withOpacity(0.75)),
-              shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
-              backgroundColor: MaterialStateProperty.all<Color>(primaryColor)
-            ),
-          onPressed: (){
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Nouvel abonnement effectué",style: TextStyle(color: primaryColor),)));
-          }, 
-          child: Text(
-            "S'ABONNER",
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 10
-            ),
-          )
-       ),
-      ),
+      floatingActionButton: Icon(Icons.abc),
+      // bottomSheet: Container(
+      //   height: 60,
+      //   width: MediaQuery.of(context).size.width,
+      //   child: ElevatedButton(
+      //     style: ButtonStyle(
+      //         overlayColor: MaterialStateProperty.all(primaryColor.withOpacity(0.25)),
+      //         shadowColor:  MaterialStateProperty.all(primaryColor.withOpacity(0.75)),
+      //         shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))),
+      //         backgroundColor: MaterialStateProperty.all<Color>(primaryColor)
+      //       ),
+      //     onPressed: (){
+      //       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Nouvel abonnement effectué",style: TextStyle(color: primaryColor),)));
+      //     }, 
+      //     child: Text(
+      //       "S'ABONNER",
+      //       style: TextStyle(
+      //         color: Colors.white,
+      //         fontSize: 10
+      //       ),
+      //     )
+      //  ),
+      // ),
     );
   }
 }

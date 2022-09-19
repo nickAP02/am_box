@@ -1,8 +1,7 @@
 import 'package:am_box/utils/colors.dart';
 import 'package:am_box/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class UnBoxedType extends StatefulWidget {
   const UnBoxedType({Key? key}) : super(key: key);
@@ -18,7 +17,7 @@ class _UnBoxedTypeState extends State<UnBoxedType> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation:0,
-        title: Text("Coffret gourmand mini"),
+        title: const Text("Coffret gourmand mini"),
         centerTitle: true,
       ),
       body: Column(
@@ -44,15 +43,15 @@ class _UnBoxedTypeState extends State<UnBoxedType> {
                   fit: BoxFit.cover,
                   scale: 1,
                   opacity: 1,
-                  image: AssetImage(assetUrl+"parfum.jpg")
+                  image: const AssetImage(assetUrl+"parfum.jpg")
                 ), 
               ),
             ),
           ),
         Padding(
-          padding: const EdgeInsets.only(top:20.0,left: 20,right: 20),
+          padding:  EdgeInsets.only(top:20.0,left: 20,right: 20),
           child: ConstrainedBox(
-             constraints: BoxConstraints(
+             constraints: const BoxConstraints(
                maxWidth: double.infinity
              ),
              child: Text(
@@ -64,8 +63,8 @@ class _UnBoxedTypeState extends State<UnBoxedType> {
              ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left:20,top:8.0),
+        const Padding(
+          padding:  EdgeInsets.only(left:20,top:8.0),
           child: Text(
             "13500 FCFA",
             style: TextStyle(
@@ -74,21 +73,21 @@ class _UnBoxedTypeState extends State<UnBoxedType> {
               ),
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left:20,top:18.0),
-          child: Text(
-            "1 mois",
-            style: TextStyle(
-                color: primaryColor,
-                fontSize: 18
-              ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left:20,top:28.0),
+        // const Padding(
+        //   padding:  EdgeInsets.only(left:20,top:18.0),
+        //   child:  Text(
+        //     "1 mois",
+        //     style: TextStyle(
+        //         color: primaryColor,
+        //         fontSize: 18
+        //       ),
+        //   ),
+        // ),
+        const Padding(
+          padding:  EdgeInsets.only(left:20,top:28.0),
           child: Text(
             "Coffret gourmand",
-            style: TextStyle(
+            style:  TextStyle(
                 color: primaryColor,
                 fontSize: 20
               ),
@@ -109,7 +108,7 @@ class _UnBoxedTypeState extends State<UnBoxedType> {
           onPressed: (){
             ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Nouvel abonnement effectué",style: TextStyle(color: primaryColor),)));
           }, 
-          child: Text(
+          child: const Text(
             "S'ABONNER",
             style: TextStyle(
               color: Colors.white,

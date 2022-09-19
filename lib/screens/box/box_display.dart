@@ -1,11 +1,6 @@
-import 'package:am_box/screens/box_types.dart';
-import 'package:am_box/screens/home/custom_button.dart';
 import 'package:am_box/utils/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
-import '../utils/constant.dart';
+import '../../utils/constant.dart';
 
 Widget boxDisplay(String label,String imageUrl) {
     return Column(

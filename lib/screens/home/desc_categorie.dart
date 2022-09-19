@@ -1,9 +1,7 @@
-import 'package:am_box/screens/home/box_category.dart';
 import 'package:am_box/utils/colors.dart';
 import 'package:am_box/utils/constant.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 
 class CategorieDesc extends StatelessWidget {
    CategorieDesc(
