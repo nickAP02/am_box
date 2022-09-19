@@ -14,13 +14,13 @@ Widget boxDisplay(String label,String imageUrl) {
             height: 260,
             width: 190,
             decoration: BoxDecoration(
-                boxShadow: [
-                BoxShadow(
-                color:Colors.white.withOpacity(0.7),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: const Offset(0, 3)
-              )],
+              //   boxShadow: [
+              //   BoxShadow(
+              //   color:Colors.white.withOpacity(0.7),
+              //   spreadRadius: 5,
+              //   blurRadius: 7,
+              //   offset: const Offset(0, 3)
+              // )],
               color: Colors.white,
               borderRadius: BorderRadius.circular(25),
               image:DecorationImage(
@@ -38,19 +38,20 @@ Widget boxDisplay(String label,String imageUrl) {
               decoration: BoxDecoration(
                 boxShadow: [
                 BoxShadow(
-                color:Colors.white.withOpacity(1),
+                color:Color.fromARGB(119, 28, 28, 28),
                 spreadRadius: 25,
-                blurRadius: 9,
+                blurRadius: 0,
                 offset: const Offset(0, 3)
               )],
-              color: Colors.white,
+              // color: Colors.grey.withOpacity(0.50),
               borderRadius: BorderRadius.circular(5)
               ),
               child: Text(
                 label,
                 style: TextStyle(
                   fontSize: 18,
-                  color: primaryColor
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(185, 255, 255, 255)
                 ),
               ),
             ),
