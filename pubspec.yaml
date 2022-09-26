@@ -14,7 +14,11 @@ dependencies:
   smooth_page_indicator: ^1.0.0+2
   lottie: ^1.4.2
   url_launcher: ^6.1.5
-
+  pin_code_fields: ^7.4.0
+  intl_phone_field: ^3.1.0
+  intl:
+  http: ^0.13.5
+  provider: ^6.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter
