@@ -15,7 +15,7 @@ class Api{
     return Uri.parse('$url/$uri');
   }
   Future<dynamic> register(User user) async{
-   debugPrint("api "+fullUri("api/register").toString());
+  //  debugPrint("api "+fullUri("api/register").toString());
     try {
       debugPrint("ok");
       var response = await client.post(
@@ -44,8 +44,9 @@ class Api{
   }
 
   Future<dynamic> login(User user) async{
+     debugPrint("api login "+fullUri("api/userLogin").toString());
     var response = await client.post(
-      fullUri("api/login"), 
+      fullUri("api/userLogin"), 
       headers: headers,
       body: json.encode({
         "telephone":user.phoneNumber,
