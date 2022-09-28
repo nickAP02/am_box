@@ -44,21 +44,60 @@ class Api{
   }
 
   Future<dynamic> login(User user) async{
-     debugPrint("api login "+fullUri("api/userLogin").toString());
+      try {
+        debugPrint("api login "+fullUri("api/userLogin").toString());
+        var response = await client.post(
+        fullUri("api/userLogin"), 
+        headers: headers,
+        body: json.encode({
+          "telephone":user.phoneNumber,
+          "password":user.password
+        }));
+        var result=json.decode(response.body);
+        // debugPrint("api status "+result.toString());
+        if(response.statusCode == 200){
+          return result;
+        }
+        else{
+          return result;
+        }
+      } on Exception catch (e) {
+        throw e.toString();
+      }
+  }
+
+  Future<dynamic> logout()async{
     var response = await client.post(
-      fullUri("api/userLogin"), 
-      headers: headers,
-      body: json.encode({
-        "telephone":user.phoneNumber,
-        "password":user.password
-      }));
+        fullUri("api/logout"),
+        headers: headers
+    );
+
     var result=json.decode(response.body);
-    debugPrint("api status "+result.toString());
+    // debugPrint("api status "+result.toString());
     if(response.statusCode == 200){
       return result;
     }
     else{
       return result;
     }
+
   }
+
+  Future<dynamic> categories() async{
+    var response = await client.get(
+        fullUri("api/v1/categories/list"),
+        headers: headers
+    );
+    var result=json.decode(response.body);
+    debugPrint("liste categories "+result.toString());
+    if(response.statusCode == 200){
+      debugPrint("categories "+result.toString());
+      return result["data"];
+    }
+    else{
+      return result;
+    }
+
+  }
+
 }

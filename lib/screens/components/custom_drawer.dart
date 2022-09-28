@@ -4,7 +4,9 @@ import 'package:am_box/screens/info/about.dart';
 import 'package:am_box/screens/info/contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 
+import '../../services/providers/user_provider.dart';
 import '../../utils/colors.dart';
 import '../../utils/constant.dart';
 import '../auth/login.dart';
@@ -15,8 +17,10 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
+
   @override
   Widget build(BuildContext context) {
+    final userProvider = Provider.of<UserProvider>(context,listen: true);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -157,6 +161,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               ListTile(
                 onTap: (){
+                  userProvider.logout();
                   Navigator.pushAndRemoveUntil<void>(
                     context,
                     MaterialPageRoute<void>(builder: (BuildContext build)=>Login()),

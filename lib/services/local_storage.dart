@@ -1,36 +1,76 @@
 import 'dart:convert';
 
 // import 'package:ago_ahome_app/model/user.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class LocalStorage{
-
+  var value;
+  var token;
     Future setToken(String token)async{
       var pref = await SharedPreferences.getInstance();
-      return pref.setString("acces_token", json.encode(token));
+      return pref.setString("token", token);
     }
 
     getToken()async{
       var pref = await SharedPreferences.getInstance();
-      var token = pref.getString("acces_token");
+      token = pref.getString("token");
       return token;
     }
-    // Future setRole(String name)async{
-    //   var pref = await SharedPreferences.getInstance();
-    //   return pref.setString("role", name);
-    // }
-    getUser() async{
+  
+    setName(String username)async{
       var pref = await SharedPreferences.getInstance();
-      var value = pref.getString("user");
-      return value;
+      var newValue = pref.setString("name", username);
     }
-    setUser(String user)async{
+    getName()async{
       var pref = await SharedPreferences.getInstance();
-      var value = pref.setString("user", json.encode(user));
-      return value;
+      var username = pref.getString("name");
+      debugPrint("name "+username.toString());
+      return username;
     }
+    setEmail(String email)async{
+      var pref = await SharedPreferences.getInstance();
+      var value = pref.setString("email", email);
+    }
+    getEmail()async{
+      var pref = await SharedPreferences.getInstance();
+      var username = pref.getString("email");
+      debugPrint("email "+username.toString());
+      return username;
+    }
+
+    setPhoneNumber(String username)async{
+      var pref = await SharedPreferences.getInstance();
+      var newValue = pref.setString("phone", username);
+    }
+    getPhoneNumber()async{
+      var pref = await SharedPreferences.getInstance();
+      var phoneNumber = pref.getString("phone");
+      debugPrint("phone number "+phoneNumber.toString());
+      return phoneNumber;
+    }
+    setFirstName(String firstName)async{
+      var pref = await SharedPreferences.getInstance();
+      var firstname = pref.setString("firstName", firstName);
+    }
+    getFirstName()async{
+      var pref = await SharedPreferences.getInstance();
+      var firstName = pref.getString("firstName");
+      debugPrint("firstName "+firstName.toString());
+      return firstName;
+    }
+    setRole(String role)async{
+      var pref = await SharedPreferences.getInstance();
+      var newValue = pref.setString("username", role);
+    }
+    getUsername()async{
+      var pref = await SharedPreferences.getInstance();
+      var role = pref.getString("role");
+      debugPrint("role "+role.toString());
+      return role;
+    }
+
     logout()async{
       var pref = await SharedPreferences.getInstance();
-      pref.remove("user");
       pref.remove("token");
     }
 

@@ -28,7 +28,9 @@ Widget categoryBox(String label,String imageUrl) {
                 fit: BoxFit.cover,
                 scale: 1,
                 opacity: 1,
-                image: AssetImage(assetUrl+imageUrl)
+                image: NetworkImage(
+                  "http://192.168.0.118:8000/categoriesImages/"+imageUrl,
+                  ) as ImageProvider
               ), 
             ),
           ),
@@ -39,7 +41,7 @@ Widget categoryBox(String label,String imageUrl) {
               label,
               style: TextStyle(
                 fontSize: 18,
-                color: Colors.white
+                color: primaryColor
               ),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:am_box/screens/auth/register-step1.dart';
 import 'package:am_box/screens/auth/register.dart';
+import 'package:am_box/services/providers/category_provider.dart';
 import 'package:am_box/services/providers/user_provider.dart';
 import 'package:am_box/utils/theme.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => CategoryProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

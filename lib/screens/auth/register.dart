@@ -32,14 +32,17 @@ class _RegisterState extends State<Register> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Text(
-            "CREATION DE COMPTE",
-            style: TextStyle(
-              color:Colors.white
-            ),
-          ),
             Padding(
-              padding: const EdgeInsets.only(top:100.0,),
+              padding: const EdgeInsets.only(top:70.0),
+              child: const Text(
+              "CREATION DE COMPTE",
+              style: TextStyle(
+                color:Colors.white
+              ),
+          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top:50.0,),
               child: Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width/1.45,

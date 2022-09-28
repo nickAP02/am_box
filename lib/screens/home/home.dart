@@ -4,6 +4,7 @@ import 'package:am_box/screens/components/custom_drawer.dart';
 import 'package:am_box/screens/components/notif.dart';
 import 'package:am_box/screens/home/box_category.dart';
 import 'package:am_box/screens/home/desc_categorie.dart';
+import 'package:am_box/services/providers/category_provider.dart';
 import 'package:am_box/utils/colors.dart';
 import 'package:am_box/utils/constant.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -11,7 +12,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../services/local_storage.dart';
+import '../../services/providers/user_provider.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -24,13 +29,24 @@ class _HomeState extends State<Home> {
   String reason = '';
   int changedIndex=0;
   final CarouselController _controller = CarouselController();
+  var categoryProvider;
+  var userProvider;
   void onPageChange(int index, CarouselPageChangedReason changeReason) {
     setState(() {
       reason = changeReason.toString();
     });
   }
   @override
+  void initState() {
+    userProvider = Provider.of<UserProvider>(context,listen: false);
+    categoryProvider = Provider.of<CategoryProvider>(context,listen: false).boxCategories();
+    super.initState();
+  }
+  @override
   Widget build(BuildContext context) {
+   
+    // userProvider= Provider.of<UserProvider>(context,listen: false);
+    final LocalStorage localStorage =  LocalStorage();
     return Scaffold(
       backgroundColor: Colors.white,
       // drawerScrimColor: primaryColor,
@@ -94,7 +110,7 @@ class _HomeState extends State<Home> {
                   child: Padding(
                     padding: const EdgeInsets.only(left:25.0,top: 10,bottom: 15),
                     child: Text(
-                      "Bonjour User,",
+                      "Bonjour"+" "+"ok"+",",
                       style: TextStyle(
                         color: primaryColor,
                         fontSize: 16,
@@ -103,50 +119,64 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                 ),
-                Stack(
-                  children: [
-                     CarouselSlider.builder(
-                  itemCount: 4,
-                  itemBuilder: (context,index,changedIndex){
-                    return categoryBox(
-                  "Parfums",
-                  "parfum.jpg",
-                  );
-                  },
-                options: CarouselOptions(
-                  initialPage: 0,
-                  // enlargeCenterPage: true,
-                  aspectRatio: 16/9,
-                  onPageChanged: (index,reason){
-                    setState(() {
-                      changedIndex = index;
-                    });
-                  },
-                  autoPlay: true,
-                  // onScrolled: (index){
-                  //   _controller.animateToPage(index!.toInt());
-                  //   debugPrint("index"+index.toString());   
-                  // }
-                ),
-                carouselController: _controller,
-                ),
-                Positioned(
-                  bottom: 50,
-                  left: 180,
-                  right:150,
-                  child: AnimatedSmoothIndicator(
-                  count: 5,
-                  activeIndex: changedIndex,
-                  onDotClicked: animateToSlide,
-                  effect: SlideEffect(
-                    activeDotColor: primaryColor,
-                    dotColor: Colors.white,
-                    dotWidth: 10,
-                    dotHeight: 8
-                  ),
-                ),
-                ),
-                  ],
+                FutureBuilder<dynamic>(
+                  future: categoryProvider,
+                  builder: (context,snapshot){
+                    debugPrint("valeur "+snapshot.data.toString());
+                    if(snapshot.data==null){
+                      return CircularProgressIndicator(color: primaryColor,);
+                    }
+                    else{
+                      var value  = snapshot.data as List;
+                       debugPrint("value "+snapshot.data.toString());
+                      return Stack(
+                        children: [
+                          CarouselSlider.builder(
+                        itemCount: value.length,
+                        itemBuilder: (context,index,changedIndex){
+                          // debugPrint("category "+categoryProvider.boxCategories().toString());
+                          return categoryBox(
+                          value[index]["nom"],
+                          value[index]["image"],
+                        );
+                        },
+                        options: CarouselOptions(
+                          initialPage: 0,
+                          // enlargeCenterPage: true,
+                          aspectRatio: 16/9,
+                          onPageChanged: (index,reason){
+                            setState(() {
+                              changedIndex = index;
+                            });
+                          },
+                          autoPlay: true,
+                          // onScrolled: (index){
+                          //   _controller.animateToPage(index!.toInt());
+                          //   debugPrint("index"+index.toString());   
+                          // }
+                        ),
+                        carouselController: _controller,
+                        ),
+                        Positioned(
+                          bottom: 50,
+                          left: 180,
+                          right:150,
+                          child: AnimatedSmoothIndicator(
+                          count: 5,
+                          activeIndex: changedIndex,
+                          onDotClicked: animateToSlide,
+                          effect: SlideEffect(
+                            activeDotColor: primaryColor,
+                            dotColor: Colors.white,
+                            dotWidth: 10,
+                            dotHeight: 8
+                          ),
+                        ),
+                        ),
+                      ],
+                    );
+                    }
+                  }
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left:18.0,bottom: 18),

@@ -1,6 +1,7 @@
 import 'package:am_box/models/user.dart';
 import 'package:am_box/screens/auth/register.dart';
 import 'package:am_box/screens/home/home.dart';
+import 'package:am_box/services/local_storage.dart';
 import 'package:am_box/services/providers/user_provider.dart';
 import 'package:am_box/utils/colors.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +16,14 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final LocalStorage localStorage =  LocalStorage();
   User user = User(email: "", firstName: "", lastName: "", phoneNumber: "", password: "");
   final  _formKey = GlobalKey<FormState>();
   var phoneController = TextEditingController();
   var pwdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context,listen: false);
+    final userProvider = Provider.of<UserProvider>(context,listen: true);
     return Scaffold(
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -29,7 +31,16 @@ class _LoginState extends State<Login> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top:100.0,),
+              padding: const EdgeInsets.only(top:70.0),
+              child: const Text(
+                "CONNEXION",
+                style: TextStyle(
+                    color:primaryColor
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top:50.0,),
               child: Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width/1.45,
@@ -207,16 +218,35 @@ class _LoginState extends State<Login> {
                             ),
                             onPressed: ()async{
                               if(_formKey.currentState!.validate()){
-                                debugPrint("current state 2"+_formKey.currentState!.validate().toString());
+                                //debugPrint("current state 2"+_formKey.currentState!.validate().toString());
                                 var request = await userProvider.login(user);
-                                debugPrint("request "+request.toString());
+                                //debugPrint("request "+request.toString());
                                 if(request["status"] == "success"){
-                                  Navigator.pushAndRemoveUntil<void>(
-                                    context,
-                                    MaterialPageRoute<void>(builder: (BuildContext build)=>Home()),
-                                    ModalRoute.withName('/'),
-                                  );
-                                  // Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+                                    debugPrint("token "+request["data"]["access_token"].toString());
+                                    debugPrint("user "+request["data"]["userInfo"].toString());
+                                    // debugPrint("user login "+userProvider.userLogin.toString());
+                                    // debugPrint("user data "+localStorage.getName().toString());
+                                    //debugPrint("pref "+userProvider.username.toString());
+                                    if(userProvider.userLogin==null){
+                                      localStorage.setName(request["data"]["userInfo"]["nom"].toString());
+                                      localStorage.setFirstName(request["data"]["userInfo"]["prenom"].toString());
+                                      localStorage.setEmail(request["data"]["userInfo"]["email"].toString());
+                                      localStorage.setPhoneNumber(request["data"]["userInfo"]["telephone"].toString());
+                                      localStorage.setRole(request["data"]["userInfo"]["role"].toString());
+                                      localStorage.setToken(request["data"]["access_token"].toString());
+                                      debugPrint("pref username "+localStorage.getFirstName().toString());
+                                      setState(() {
+                                        Navigator.pushAndRemoveUntil<void>(
+                                          context,
+                                          MaterialPageRoute<void>(builder: (BuildContext build)=>Home()),
+                                          ModalRoute.withName('/'),
+                                        );
+                                      });
+                                    }
+                                    else{
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Une erreur s'est produite, reprendre la saisie")));
+                                    }
+
                                 }
                                 else{
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(request["message"][0])));
